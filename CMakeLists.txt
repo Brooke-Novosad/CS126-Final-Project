@@ -49,10 +49,18 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
-list(APPEND SOURCE_FILES    src/tile.cc
+list(APPEND CORE_SOURCE_FILES    src/tile.cc
+        src/puzzle_game.cc
+        src/game_board.cc)
+
+list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/slide_puzzle_app.cc)
 
+
 list(APPEND TEST_FILES tests/temp_test.cc)
+
+add_executable(run_app apps/main.cc ${CORE_SOURCE_FILES})
+target_include_directories(run_app PRIVATE include)
 
 ci_make_app(
         APP_NAME        slide-puzzle

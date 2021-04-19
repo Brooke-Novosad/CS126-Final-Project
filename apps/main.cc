@@ -1,12 +1,12 @@
 //
-// Created by pokey on 4/17/2021.
+// Created by pokey on 4/19/2021.
 //
-#include <catch2/catch.hpp>
-#include "game_board.h"
 #include <iostream>
+#include "game_board.h"
 
-TEST_CASE("") {
+int main() {
     size_t num = 3;
     slidepuzzle::GameBoard game(num);
     std::cout << game.GetNum();
+    return 0;
 }
