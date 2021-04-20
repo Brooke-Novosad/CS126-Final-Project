@@ -18,9 +18,16 @@ class GameBoard {
 
     std::string GetNum();
 
+    const std::vector<std::vector<Tile>>& GetTileVector();
+
+    const std::vector<std::vector<vec2>>& GetPointsVector();
+
     void Display() const;
 
     private:
+
+    void AddToTileVector();
+
     size_t board_size_;
     std::vector<std::vector<Tile>> tiles_;
     size_t tile_width_;

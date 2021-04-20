@@ -57,7 +57,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/game_board.cc)
 
 
-list(APPEND TEST_FILES tests/temp_test.cc)
+list(APPEND TEST_FILES tests/game_board_test.cc)
 
 add_executable(run_app apps/main.cc ${CORE_SOURCE_FILES})
 target_include_directories(run_app PRIVATE include)

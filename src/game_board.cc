@@ -18,30 +18,42 @@ namespace slidepuzzle {
         size_t num = 0;
         tiles_.resize(board_size_, std::vector<Tile>(board_size_, Tile(num)));
         tile_points_.resize(board_size, std::vector<vec2>(board_size, vec2(0, 0)));
+        AddToTileVector();
+    }
+
+    void GameBoard::AddToTileVector() {
         std::vector<size_t> numbers;
-        for (size_t num = 1; num < (board_size * board_size); num++) {
+        for (size_t num = 1; num < (board_size_ * board_size_); num++) {
             numbers.push_back(num);
         }
         std::random_shuffle(numbers.begin(), numbers.end());
         tile_width_ = (size_t) (kBottom_corner.x - kTop_corner.x) / board_size_;
         size_t count = 0;
         vec2 curr_point = kTop_corner;
-        for (size_t row = 0; row < board_size; row++) {
-            for (size_t col = 0; col < board_size; col++) {
-                if (row == board_size - 1 && col == board_size - 1) {
+        for (size_t row = 0; row < board_size_; row++) {
+            for (size_t col = 0; col < board_size_; col++) {
+                if (row == board_size_ - 1 && col == board_size_ - 1) {
                     tiles_[row][col] = Tile(true);
                 } else {
                     tiles_[row][col] = Tile(numbers.at(count));
                 }
                 count++;
                 tile_points_[row][col] = curr_point;
-                if (col == board_size - 1) {
+                if (col == board_size_ - 1) {
                     curr_point = vec2(kTop_corner.x, curr_point.y  + tile_width_);
                 } else {
                     curr_point = vec2(curr_point.x + tile_width_, curr_point.y);
                 }
             }
         }
+    }
+
+    const std::vector<std::vector<Tile>>& GameBoard::GetTileVector() {
+        return tiles_;
+    }
+
+    const std::vector<std::vector<vec2>>& GameBoard::GetPointsVector() {
+        return tile_points_;
     }
 
     std::string GameBoard::GetNum() {
