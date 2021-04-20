@@ -2,6 +2,7 @@
 // Created by pokey on 4/19/2021.
 //
 #include "game_board.h"
+#include <iostream>
 
 //this class will be used to keep track of the board state, ie the order of numbers, the tiles and the open space.
 // this will be used in the app so the key functions will be in here too.
@@ -16,12 +17,15 @@ namespace slidepuzzle {
         board_size_ = board_size;
         size_t num = 0;
         tiles_.resize(board_size_, std::vector<Tile>(board_size_, Tile(num)));
+        tile_points_.resize(board_size, std::vector<vec2>(board_size, vec2(0, 0)));
         std::vector<size_t> numbers;
         for (size_t num = 1; num < (board_size * board_size); num++) {
             numbers.push_back(num);
         }
         std::random_shuffle(numbers.begin(), numbers.end());
+        tile_width_ = (size_t) (kBottom_corner.x - kTop_corner.x) / board_size_;
         size_t count = 0;
+        vec2 curr_point = kTop_corner;
         for (size_t row = 0; row < board_size; row++) {
             for (size_t col = 0; col < board_size; col++) {
                 if (row == board_size - 1 && col == board_size - 1) {
@@ -30,18 +34,28 @@ namespace slidepuzzle {
                     tiles_[row][col] = Tile(numbers.at(count));
                 }
                 count++;
+                tile_points_[row][col] = curr_point;
+                if (col == board_size - 1) {
+                    curr_point = vec2(kTop_corner.x, curr_point.y  + tile_width_);
+                } else {
+                    curr_point = vec2(curr_point.x + tile_width_, curr_point.y);
+                }
             }
         }
     }
 
     std::string GameBoard::GetNum() {
-        std::string hi;
-        for (size_t row = 0; row < board_size_; row++) {
-            for (size_t col = 0; col < board_size_; col++) {
-                hi = hi + std::to_string(tiles_[row][col].GetTileNum());
-            }
-        }
+        std::string hi = std::to_string(tile_points_.at(1).at(0).x) + " " + std::to_string(tile_points_.at(1).at(0).y);
         return hi;
     }
 
+    void GameBoard::Display() const {
+        for (size_t row = 0; row != tiles_.size(); row++) {
+            for (size_t col = 0; col != tiles_.at(row).size(); col++) {
+                tiles_[row][col].DrawTile(tile_points_[row][col], tile_width_);
+            }
+        }
+        ci::gl::color(ci::Color("white"));
+        ci::gl::drawStrokedRect(ci::Rectf(kTop_corner, kBottom_corner));
+    }
 }

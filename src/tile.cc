@@ -3,6 +3,8 @@
 //
 #include "tile.h"
 
+using glm::vec2;
+
 namespace slidepuzzle {
 
     Tile::Tile(size_t num) {
@@ -11,6 +13,7 @@ namespace slidepuzzle {
     }
 
     Tile::Tile(bool set_emtpy) {
+        tile_num_ = 1000;
         empty_ = set_emtpy;
     }
 
@@ -20,6 +23,19 @@ namespace slidepuzzle {
 
     bool Tile::IsEmpty() {
         return empty_;
+    }
+
+    void Tile::DrawTile(const vec2& top_point, size_t tile_width) const {
+        if (!empty_) {
+            ci::gl::color(ci::Color("teal"));
+            ci::gl::drawSolidRect(ci::Rectf(top_point, vec2(top_point.x + tile_width, top_point.y + tile_width)));
+            ci::gl::color(ci::Color("yellow"));
+            ci::gl::drawStrokedRect(ci::Rectf(top_point, vec2(top_point.x + tile_width, top_point.y + tile_width)));
+            vec2 text = vec2(top_point.x + tile_width / 2, top_point.y + tile_width / 2);
+            ci::gl::drawStringCentered(
+                    std::to_string(tile_num_),
+                    glm::vec2(top_point.x + tile_width / 2, top_point.y + tile_width / 2), ci::Color("white"), ci::Font("Arial", 50));
+        }
     }
 
 }

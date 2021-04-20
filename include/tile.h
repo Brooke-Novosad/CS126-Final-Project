@@ -4,8 +4,9 @@
 
 #ifndef FINAL_PROJECT_TILE_H
 #define FINAL_PROJECT_TILE_H
+#include "cinder/gl/gl.h"
 
-#endif //FINAL_PROJECT_TILE_H
+using glm::vec2;
 
 namespace slidepuzzle {
 
@@ -19,9 +20,12 @@ public:
 
     size_t GetTileNum();
 
+    void DrawTile(const vec2& top_point, size_t tile_width) const;
+
 private:
     size_t tile_num_;
     bool empty_;
 
 };
 }
+#endif //FINAL_PROJECT_TILE_H

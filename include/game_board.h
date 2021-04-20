@@ -1,15 +1,14 @@
 //
 // Created by pokey on 4/19/2021.
 //
-
-#ifndef FINAL_PROJECT_GAME_BOARD_H
-#define FINAL_PROJECT_GAME_BOARD_H
-
-#endif //FINAL_PROJECT_GAME_BOARD_H
+#pragma once
+#include "cinder/gl/gl.h"
 #include "tile.h"
 #include <vector>
 #include <algorithm>
 #include <string>
+
+using glm::vec2;
 
 namespace slidepuzzle {
 
@@ -19,8 +18,15 @@ class GameBoard {
 
     std::string GetNum();
 
+    void Display() const;
+
     private:
     size_t board_size_;
     std::vector<std::vector<Tile>> tiles_;
+    size_t tile_width_;
+    std::vector<std::vector<vec2>> tile_points_;
+
+    const vec2 kTop_corner = vec2(50, 50);
+    const vec2 kBottom_corner = vec2(800, 800);
 };
 }

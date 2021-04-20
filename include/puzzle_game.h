@@ -4,5 +4,5 @@
 
 #ifndef FINAL_PROJECT_PUZZLE_GAME_H
 #define FINAL_PROJECT_PUZZLE_GAME_H
-
+#include "cinder/gl/gl.h"
 #endif //FINAL_PROJECT_PUZZLE_GAME_H
