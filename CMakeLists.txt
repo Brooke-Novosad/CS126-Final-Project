@@ -60,9 +60,6 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
 
 list(APPEND TEST_FILES tests/game_board_test.cc)
 
-add_executable(run_app apps/main.cc ${CORE_SOURCE_FILES})
-target_include_directories(run_app PRIVATE include)
-
 ci_make_app(
         APP_NAME        slide-puzzle
         CINDER_PATH     ${CINDER_PATH}
