@@ -9,12 +9,27 @@
 
 namespace slidepuzzle {
 
+/**
+* An app for visualising the slide puzzle game.
+*/
 class SlidePuzzleApp : public ci::app::App {
 
 public:
+    /**
+     * A constructor that sets up the app screen.
+     */
     SlidePuzzleApp();
 
+    /**
+     * Draws the background, game board, and tiles.
+     */
     void draw() override;
+
+    /**
+     * When mouse is clicked it will highlight the tile the player clicked on.
+     * @param event
+     */
+    void mouseDown(ci::app::MouseEvent event) override;
 
     /**
     //might not need, use mousedown overrides
@@ -26,8 +41,5 @@ public:
 private:
     size_t board_size = 3;
     GameBoard game_board_ = GameBoard(board_size);
-
 };
-
-
 }

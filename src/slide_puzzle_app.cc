@@ -16,4 +16,8 @@ void SlidePuzzleApp::draw() {
     game_board_.Display();
 }
 
+void SlidePuzzleApp::mouseDown(ci::app::MouseEvent event) {
+    game_board_.ClickTile(event.getPos());
+}
+
 }
