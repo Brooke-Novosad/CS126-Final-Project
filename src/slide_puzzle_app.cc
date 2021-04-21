@@ -5,15 +5,20 @@
 
 namespace slidepuzzle {
 
-SlidePuzzleApp::SlidePuzzleApp() {
-    ci::app::setWindowSize(kWindowSize, kWindowSize);
+    SlidePuzzleApp::SlidePuzzleApp() {
+        ci::app::setWindowSize(kWindowSize, kWindowSize);
+    }
+
+    void SlidePuzzleApp::draw() {
+        ci::Color background_color("gray");
+        ci::gl::clear(background_color);
+
+        game_board_.Display();
+    }
+
+    void SlidePuzzleApp::mouseDown(ci::app::MouseEvent event) {
+        game_board_.ClickTile(event.getPos());
+    }
+
 }
 
-void SlidePuzzleApp::draw() {
-    ci::Color background_color("gray");
-    ci::gl::clear(background_color);
-
-    game_board_.Display();
-}
-
-}
