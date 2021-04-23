@@ -20,9 +20,5 @@ namespace slidepuzzle {
         game_board_.ClickTile(event.getPos());
     }
 
-void SlidePuzzleApp::mouseDown(ci::app::MouseEvent event) {
-    game_board_.ClickTile(event.getPos());
-}
-
 }
 

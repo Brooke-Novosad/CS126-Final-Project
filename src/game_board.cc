@@ -28,7 +28,7 @@ namespace slidepuzzle {
         for (size_t num = 1; num < (board_size_ * board_size_); num++) {
             numbers.push_back(num);
         }
-        std::random_shuffle(numbers.begin(), numbers.end());
+        std::shuffle(std::begin(numbers), std::end(numbers), std::random_device());
         tile_width_ = (size_t) (kBottom_corner.x - kTop_corner.x) / board_size_;
         size_t count = 0;
         vec2 curr_point = kTop_corner;

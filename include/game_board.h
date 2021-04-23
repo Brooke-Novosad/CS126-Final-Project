@@ -6,8 +6,15 @@
 #include "tile.h"
 #include <vector>
 #include <algorithm>
+#include <random>
 #include <string>
+#include <chrono>
 
+//add an if in app that says if the game started or not for a menu
+// actually use an enum to see what state of the game you are in
+// make a menu class for menu logic
+//menu has a class and the game has a class they both have display
+// when a button is pressed it changes the boolean or enum in the app class
 using glm::vec2;
 
 namespace slidepuzzle {
