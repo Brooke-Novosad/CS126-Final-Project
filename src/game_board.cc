@@ -85,6 +85,42 @@ namespace slidepuzzle {
                     point.y + tile_width_ > screen_coords.y) {
                     curr_tile_ = tiles_[row][col];
                     curr_tile_coords_ = point;
+                    curr_row = row;
+                    curr_col = col;
+                }
+            }
+        }
+    }
+
+    void GameBoard::SlideTile(std::string direction) {
+        if (!curr_tile_.IsEmpty()) {
+            if (direction == up) {
+                if (curr_row != 0) {
+                    if (tiles_[curr_row - 1][curr_col].IsEmpty()) {
+                        tiles_[curr_row - 1][curr_col] = curr_tile_;
+                        tiles_[curr_row][curr_col] = Tile(true);
+                    }
+                }
+            } else if (direction == down) {
+                if (curr_row != board_size_ - 1) {
+                    if (tiles_[curr_row + 1][curr_col].IsEmpty()) {
+                        tiles_[curr_row + 1][curr_col] = curr_tile_;
+                        tiles_[curr_row][curr_col] = Tile(true);
+                    }
+                }
+            } else if (direction == left) {
+                if (curr_col != 0) {
+                    if (tiles_[curr_row][curr_col - 1].IsEmpty()) {
+                        tiles_[curr_row][curr_col - 1] = curr_tile_;
+                        tiles_[curr_row][curr_col] = Tile(true);
+                    }
+                }
+            } else if (direction == right) {
+                if (curr_col != board_size_ - 1) {
+                    if (tiles_[curr_row][curr_col + 1].IsEmpty()) {
+                        tiles_[curr_row][curr_col + 1] = curr_tile_;
+                        tiles_[curr_row][curr_col] = Tile(true);
+                    }
                 }
             }
         }

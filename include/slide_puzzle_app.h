@@ -31,6 +31,8 @@ namespace slidepuzzle {
          */
         void mouseDown(ci::app::MouseEvent event) override;
 
+        void keyDown(ci::app::KeyEvent event) override;
+
         /**
         //might not need, use mousedown overrides
         void update() override;
@@ -39,6 +41,10 @@ namespace slidepuzzle {
         const int kMargin = 500;
 
     private:
+        std::string up = "up";
+        std::string down = "down";
+        std::string left = "left";
+        std::string right = "right";
         size_t board_size = 3;
         GameBoard game_board_ = GameBoard(board_size);
     };

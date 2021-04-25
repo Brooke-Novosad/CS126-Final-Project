@@ -20,5 +20,22 @@ namespace slidepuzzle {
         game_board_.ClickTile(event.getPos());
     }
 
+    void SlidePuzzleApp::keyDown(ci::app::KeyEvent event) {
+        switch (event.getCode()) {
+            case ci::app::KeyEvent::KEY_UP:
+                game_board_.SlideTile(up);
+                break;
+            case ci::app::KeyEvent::KEY_DOWN:
+                game_board_.SlideTile(down);
+                break;
+            case ci::app::KeyEvent::KEY_LEFT:
+                game_board_.SlideTile(left);
+                break;
+            case ci::app::KeyEvent::KEY_RIGHT:
+                game_board_.SlideTile(right);
+                break;
+        }
+    }
+
 }
 

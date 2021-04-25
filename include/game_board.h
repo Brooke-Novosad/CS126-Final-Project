@@ -58,6 +58,8 @@ namespace slidepuzzle {
          */
         void ClickTile(const vec2& screen_coords);
 
+        void SlideTile(std::string direction);
+
     private:
 
         /**
@@ -73,10 +75,16 @@ namespace slidepuzzle {
 
         Tile curr_tile_ = Tile(true);
         vec2 curr_tile_coords_;
+        size_t curr_row;
+        size_t curr_col;
 
         const vec2 kTop_corner = vec2(50, 50);
         const vec2 kBottom_corner = vec2(800, 800);
         const ci::Color white = "white";
         const ci::Color pink = "pink";
+        std::string up = "up";
+        std::string down = "down";
+        std::string left = "left";
+        std::string right = "right";
     };
 }
