@@ -60,6 +60,9 @@ namespace slidepuzzle {
 
         void SlideTile(std::string direction);
 
+        bool IsGameWon();
+
+
     private:
 
         /**

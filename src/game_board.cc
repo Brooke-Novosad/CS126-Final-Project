@@ -125,4 +125,22 @@ namespace slidepuzzle {
             }
         }
     }
+
+    bool GameBoard::IsGameWon() {
+        std::vector<size_t> tile_nums;
+        for (size_t row = 0; row != tiles_.size(); row++) {
+            for (size_t col = 0; col != tiles_.at(row).size(); col++) {
+                if (!tiles_[row][col].IsEmpty()) {
+                    tile_nums.push_back(tiles_[row][col].GetTileNum());
+                }
+            }
+        }
+
+        for (size_t i = 0; i != tile_nums.size() - 1; i++) {
+            if (tile_nums.at(i) + 1 != tile_nums.at(i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
