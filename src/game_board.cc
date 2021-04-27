@@ -88,6 +88,10 @@ namespace slidepuzzle {
         return tile_points_;
     }
 
+    Tile GameBoard::GetCurrTile() {
+        return curr_tile_;
+    }
+
     std::string GameBoard::GetNum() {
         std::string hi = std::to_string(tile_points_.at(1).at(0).x) + " " +
                          std::to_string(tile_points_.at(1).at(0).y);

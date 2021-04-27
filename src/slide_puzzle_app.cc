@@ -5,7 +5,7 @@
 
 namespace slidepuzzle {
 
-    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(board_size)} {
+    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(board_size_)} {
         ci::app::setWindowSize(kWindowSize, kWindowSize);
     }
 
@@ -17,7 +17,8 @@ namespace slidepuzzle {
         } else {
             ci::gl::drawStringCentered(
                     "You Win!",
-                    glm::vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("white"), ci::Font("Arial", 100));
+                    glm::vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("white"),
+                    ci::Font(font, font_size));
         }
     }
 

@@ -4,7 +4,8 @@
 #include <catch2/catch.hpp>
 #include "game_board.h"
 #include <iostream>
-
+//make tests for sliding the pieces
+//make tests for ending the game
 TEST_CASE("Constructor") {
     size_t num = 3;
     slidepuzzle::GameBoard game(num);
@@ -23,6 +24,21 @@ TEST_CASE("Constructor") {
         REQUIRE(test_tiles.size() == 3);
         REQUIRE(num_tiles == 9);
         REQUIRE(num_empty == 1);
+    }
+    SECTION("Tiles added correctly from a vector of numbers") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game1(numbers);
+        std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game1.GetTileVector();
+        REQUIRE(test_tiles.size() == 3);
+        REQUIRE(test_tiles[0][0].GetTileNum() == 2);
+        REQUIRE(test_tiles[0][1].GetTileNum() == 4);
+        REQUIRE(test_tiles[0][2].GetTileNum() == 6);
+        REQUIRE(test_tiles[1][0].GetTileNum() == 1);
+        REQUIRE(test_tiles[1][1].GetTileNum() == 5);
+        REQUIRE(test_tiles[1][2].GetTileNum() == 8);
+        REQUIRE(test_tiles[2][0].GetTileNum() == 3);
+        REQUIRE(test_tiles[2][1].GetTileNum() == 7);
+        REQUIRE(test_tiles[2][2].GetTileNum() == 1000);
     }
     SECTION("Numbers on tiles all different") {
         std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game.GetTileVector();
@@ -78,6 +94,28 @@ TEST_CASE("Constructor") {
         REQUIRE(num_tiles == 16);
         REQUIRE(num_empty == 1);
     }
+    SECTION("Tiles added from vector of numbers bigger board size") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6, 9}, {1, 5, 8, 11}, {3, 7, 13, 15}, {10, 14, 12, 90}};
+        slidepuzzle::GameBoard game1(numbers);
+        std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game1.GetTileVector();
+        REQUIRE(test_tiles.size() == 4);
+        REQUIRE(test_tiles[0][0].GetTileNum() == 2);
+        REQUIRE(test_tiles[0][1].GetTileNum() == 4);
+        REQUIRE(test_tiles[0][2].GetTileNum() == 6);
+        REQUIRE(test_tiles[0][3].GetTileNum() == 9);
+        REQUIRE(test_tiles[1][0].GetTileNum() == 1);
+        REQUIRE(test_tiles[1][1].GetTileNum() == 5);
+        REQUIRE(test_tiles[1][2].GetTileNum() == 8);
+        REQUIRE(test_tiles[1][3].GetTileNum() == 11);
+        REQUIRE(test_tiles[2][0].GetTileNum() == 3);
+        REQUIRE(test_tiles[2][1].GetTileNum() == 7);
+        REQUIRE(test_tiles[2][2].GetTileNum() == 13);
+        REQUIRE(test_tiles[2][3].GetTileNum() == 15);
+        REQUIRE(test_tiles[3][0].GetTileNum() == 10);
+        REQUIRE(test_tiles[3][1].GetTileNum() == 14);
+        REQUIRE(test_tiles[3][2].GetTileNum() == 12);
+        REQUIRE(test_tiles[3][3].GetTileNum() == 1000);
+    }
     SECTION("Square points with bigger size") {
         std::vector<std::vector<vec2>> test_points = game_big.GetPointsVector();
         REQUIRE(test_points.at(0).size() == 4);
@@ -96,5 +134,26 @@ TEST_CASE("Constructor") {
         REQUIRE(test_points[1][1].x - test_points[1][0].x == 187);
         REQUIRE(test_points[2][1].x - test_points[2][0].x == 187);
         REQUIRE(test_points[3][1].x - test_points[3][0].x == 187);
+    }
+}
+TEST_CASE("Click Tile") {
+    std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+    slidepuzzle::GameBoard game(numbers);
+    SECTION("Click top tile") {
+        game.ClickTile(vec2(60, 60));
+        REQUIRE(game.GetCurrTile().GetTileNum() == 2);
+    }
+    SECTION("Click middle tile") {
+        game.ClickTile(vec2(350, 560));
+        REQUIRE(game.GetCurrTile().GetTileNum() == 7);
+    }
+    SECTION("Click bottom tile") {
+        game.ClickTile(vec2(560, 350));
+        REQUIRE(game.GetCurrTile().GetTileNum() == 8);
+    }
+    SECTION("Click outside the square") {
+        game.ClickTile(vec2(350, 560));
+        game.ClickTile(vec2(20, 20));
+        REQUIRE(game.GetCurrTile().GetTileNum() == 7);
     }
 }

@@ -55,6 +55,12 @@ namespace slidepuzzle {
         const std::vector<std::vector<vec2>>& GetPointsVector();
 
         /**
+         * Gets the current tile that the player clicked on.
+         * @return a Tile that is the current tile
+         */
+        Tile GetCurrTile();
+
+        /**
          * Displays the board and the current positions of the Tiles.
          */
         void Display() const;

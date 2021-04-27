@@ -27,10 +27,14 @@ namespace slidepuzzle {
 
         /**
          * When mouse is clicked it will highlight the tile the player clicked on.
-         * @param event
+         * @param event the event the mouse pad is detecting
          */
         void mouseDown(ci::app::MouseEvent event) override;
 
+        /**
+         * When a key on the keyboard is clicked, it will trigger the game board to do something.
+         * @param event the event of the key that is pressed
+         */
         void keyDown(ci::app::KeyEvent event) override;
 
         /**
@@ -45,7 +49,9 @@ namespace slidepuzzle {
         std::string down = "down";
         std::string left = "left";
         std::string right = "right";
-        size_t board_size = 3;
+        std::string font = "Arial";
+        size_t font_size = 100;
+        size_t board_size_ = 3;
         // For showing win screen
         std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 6, 8}, {7, 5, 1000}};
         GameBoard game_board_;
