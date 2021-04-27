@@ -46,6 +46,8 @@ namespace slidepuzzle {
         std::string left = "left";
         std::string right = "right";
         size_t board_size = 3;
-        GameBoard game_board_ = GameBoard(board_size);
+        // For showing win screen
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 6, 8}, {7, 5, 1000}};
+        GameBoard game_board_;
     };
 }

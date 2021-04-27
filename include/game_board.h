@@ -30,6 +30,13 @@ namespace slidepuzzle {
         GameBoard(size_t board_size);
 
         /**
+         * Constructor that makes a 2D vector of tiles with the numbers in the passed vector. Bottom left corner will
+         * always be the empty tile.
+         * @param set_tiles a 2D vector of numbers for tiles
+         */
+        GameBoard(std::vector<std::vector<size_t>> set_tiles);
+
+        /**
          * A method that helps print things out. This is for making sure things work, won't be included at the end.
          * @return a string
          */
@@ -58,17 +65,30 @@ namespace slidepuzzle {
          */
         void ClickTile(const vec2& screen_coords);
 
+        /**
+         * Moves the current tile in the direction that the player clicked.
+         * @param direction the direction that the player clicked
+         */
         void SlideTile(std::string direction);
 
+        /**
+         * Checked if the player won for that move.
+         * @return a boolean of if they won
+         */
         bool IsGameWon();
 
 
     private:
 
         /**
-         * A helper method for the constructor that adds Tiles and coordinates to their respective vectors.
+         * A helper method for the constructor that adds Tiles to it's vector.
          */
         void AddToTileVector();
+
+        /**
+         * A helper method for the constructors that adds coordinates to it's vector.
+         */
+        void AddToPointVector();
 
         size_t board_size_;
         size_t tile_width_;

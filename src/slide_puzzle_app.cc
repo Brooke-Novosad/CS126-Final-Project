@@ -5,7 +5,7 @@
 
 namespace slidepuzzle {
 
-    SlidePuzzleApp::SlidePuzzleApp() {
+    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(board_size)} {
         ci::app::setWindowSize(kWindowSize, kWindowSize);
     }
 
