@@ -157,3 +157,42 @@ TEST_CASE("Click Tile") {
         REQUIRE(game.GetCurrTile().GetTileNum() == 7);
     }
 }
+
+TEST_CASE("Slide Tile") {
+    std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+    slidepuzzle::GameBoard game(numbers);
+    SECTION("Slide tile to empty space to the left") {
+
+    }
+    SECTION("Slide tile to empty space to the right") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers);
+    }
+    SECTION("Slide tile to empty space down") {
+
+    }
+    SECTION("Slide tile to empty space up") {
+
+    }
+    SECTION("Slide tile to left wall") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers);
+        game.ClickTile(vec2(60, 60)); //2
+    }
+    SECTION("Slide tile to right wall") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers);
+        game.ClickTile(vec2(560, 60)); //6
+    }
+    SECTION("Slide tile to top wall") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers);
+        game.ClickTile(vec2(60, 60)); //2
+    }
+    SECTION("Slide tile to bottom wall") {
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers);
+        game.ClickTile(vec2(60, 560)); //3
+    }
+
+}

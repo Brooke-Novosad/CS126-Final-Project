@@ -45,12 +45,8 @@ namespace slidepuzzle {
         const int kMargin = 500;
 
     private:
-        std::string up = "up";
-        std::string down = "down";
-        std::string left = "left";
-        std::string right = "right";
         std::string font = "Arial";
-        size_t font_size = 100;
+        float font_size = 100;
         size_t board_size_ = 3;
         // For showing win screen
         std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 6, 8}, {7, 5, 1000}};

@@ -23,6 +23,7 @@ namespace slidepuzzle {
 */
     class GameBoard {
     public:
+        enum direction { up, down, left, right };
         /**
          * Constructor that sets the board size and initializes the vectors of the tiles in a random order.
          * @param board_size the number of tiles in a row
@@ -75,7 +76,7 @@ namespace slidepuzzle {
          * Moves the current tile in the direction that the player clicked.
          * @param direction the direction that the player clicked
          */
-        void SlideTile(std::string direction);
+        void SlideTile(direction direction);
 
         /**
          * Checked if the player won for that move.
@@ -111,9 +112,5 @@ namespace slidepuzzle {
         const vec2 kBottom_corner = vec2(800, 800);
         const ci::Color white = "white";
         const ci::Color pink = "pink";
-        std::string up = "up";
-        std::string down = "down";
-        std::string left = "left";
-        std::string right = "right";
     };
 }

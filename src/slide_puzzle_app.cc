@@ -5,7 +5,7 @@
 
 namespace slidepuzzle {
 
-    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(board_size_)} {
+    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(numbers)} {
         ci::app::setWindowSize(kWindowSize, kWindowSize);
     }
 
@@ -26,19 +26,20 @@ namespace slidepuzzle {
         game_board_.ClickTile(event.getPos());
     }
 
+    //use enums for directions instead of strings
     void SlidePuzzleApp::keyDown(ci::app::KeyEvent event) {
         switch (event.getCode()) {
             case ci::app::KeyEvent::KEY_UP:
-                game_board_.SlideTile(up);
+                game_board_.SlideTile(GameBoard::up);
                 break;
             case ci::app::KeyEvent::KEY_DOWN:
-                game_board_.SlideTile(down);
+                game_board_.SlideTile(GameBoard::down);
                 break;
             case ci::app::KeyEvent::KEY_LEFT:
-                game_board_.SlideTile(left);
+                game_board_.SlideTile(GameBoard::left);
                 break;
             case ci::app::KeyEvent::KEY_RIGHT:
-                game_board_.SlideTile(right);
+                game_board_.SlideTile(GameBoard::right);
                 break;
         }
     }

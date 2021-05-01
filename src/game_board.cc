@@ -126,7 +126,7 @@ namespace slidepuzzle {
         }
     }
 
-    void GameBoard::SlideTile(std::string direction) {
+    void GameBoard::SlideTile(direction direction) {
         if (!curr_tile_.IsEmpty()) {
             if (direction == up) {
                 if (curr_row != 0) {
