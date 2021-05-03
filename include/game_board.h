@@ -28,14 +28,14 @@ namespace slidepuzzle {
          * Constructor that sets the board size and initializes the vectors of the tiles in a random order.
          * @param board_size the number of tiles in a row
          */
-        GameBoard(size_t board_size);
+        GameBoard(size_t board_size, bool hard_mode);
 
         /**
          * Constructor that makes a 2D vector of tiles with the numbers in the passed vector. Bottom left corner will
          * always be the empty tile.
          * @param set_tiles a 2D vector of numbers for tiles
          */
-        GameBoard(std::vector<std::vector<size_t>> set_tiles);
+        GameBoard(std::vector<std::vector<size_t>> set_tiles, bool hard_mode);
 
         /**
          * A method that helps print things out. This is for making sure things work, won't be included at the end.
@@ -99,6 +99,7 @@ namespace slidepuzzle {
 
         size_t board_size_;
         size_t tile_width_;
+        bool hard_mode_;
 
         std::vector<std::vector<Tile>> tiles_;
         std::vector<std::vector<vec2>> tile_points_;

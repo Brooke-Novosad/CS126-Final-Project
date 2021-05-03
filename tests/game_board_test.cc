@@ -8,7 +8,7 @@
 //make tests for ending the game
 TEST_CASE("Constructor") {
     size_t num = 3;
-    slidepuzzle::GameBoard game(num);
+    slidepuzzle::GameBoard game(num, true);
     SECTION("Tiles added correctly") {
         std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game.GetTileVector();
         size_t num_empty = 0;
@@ -27,7 +27,7 @@ TEST_CASE("Constructor") {
     }
     SECTION("Tiles added correctly from a vector of numbers") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game1(numbers);
+        slidepuzzle::GameBoard game1(numbers, true);
         std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game1.GetTileVector();
         REQUIRE(test_tiles.size() == 3);
         REQUIRE(test_tiles[0][0].GetTileNum() == 2);
@@ -77,7 +77,7 @@ TEST_CASE("Constructor") {
         REQUIRE(test_points[2][1].x - test_points[2][0].x == 250);
     }
     size_t num_big = 4;
-    slidepuzzle::GameBoard game_big(num_big);
+    slidepuzzle::GameBoard game_big(num_big, true);
     SECTION("Tiles added with bigger board size") {
         std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game_big.GetTileVector();
         size_t num_empty = 0;
@@ -96,7 +96,7 @@ TEST_CASE("Constructor") {
     }
     SECTION("Tiles added from vector of numbers bigger board size") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6, 9}, {1, 5, 8, 11}, {3, 7, 13, 15}, {10, 14, 12, 90}};
-        slidepuzzle::GameBoard game1(numbers);
+        slidepuzzle::GameBoard game1(numbers, true);
         std::vector<std::vector<slidepuzzle::Tile>> test_tiles = game1.GetTileVector();
         REQUIRE(test_tiles.size() == 4);
         REQUIRE(test_tiles[0][0].GetTileNum() == 2);
@@ -138,7 +138,7 @@ TEST_CASE("Constructor") {
 }
 TEST_CASE("Click Tile") {
     std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-    slidepuzzle::GameBoard game(numbers);
+    slidepuzzle::GameBoard game(numbers, true);
     SECTION("Click top tile") {
         game.ClickTile(vec2(60, 60));
         REQUIRE(game.GetCurrTile().GetTileNum() == 2);
@@ -160,13 +160,13 @@ TEST_CASE("Click Tile") {
 
 TEST_CASE("Slide Tile") {
     std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-    slidepuzzle::GameBoard game(numbers);
+    slidepuzzle::GameBoard game(numbers, true);
     SECTION("Slide tile to empty space to the left") {
 
     }
     SECTION("Slide tile to empty space to the right") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game(numbers);
+        slidepuzzle::GameBoard game(numbers, true);
     }
     SECTION("Slide tile to empty space down") {
 
@@ -176,23 +176,50 @@ TEST_CASE("Slide Tile") {
     }
     SECTION("Slide tile to left wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game(numbers);
+        slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(60, 60)); //2
+        game.SlideTile(slidepuzzle::GameBoard::left);
+        slidepuzzle::Tile tile = game.GetTileVector()[0][0];
+        REQUIRE(numbers[0][0] == tile.GetTileNum());
+
     }
     SECTION("Slide tile to right wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game(numbers);
+        slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(560, 60)); //6
     }
     SECTION("Slide tile to top wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game(numbers);
+        slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(60, 60)); //2
     }
     SECTION("Slide tile to bottom wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-        slidepuzzle::GameBoard game(numbers);
+        slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(60, 560)); //3
     }
+    SECTION("Slide tile into another tile") {
 
+    }
+}
+
+TEST_CASE("Win Game") {
+    SECTION("Board won easy mode") {
+
+    }
+    SECTION("Board won hard mode") {
+
+    }
+    SECTION("Board not won yet random") {
+
+    }
+    SECTION("Board in hard mode, in order, not won") {
+
+    }
+    SECTION("Board not won yet in easy mode") {
+
+    }
+    SECTION("Board not won yet in hard mode") {
+
+    }
 }

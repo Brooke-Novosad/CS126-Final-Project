@@ -46,19 +46,39 @@ namespace slidepuzzle {
                 game_board_.SlideTile(GameBoard::right);
                 break;
             case ci::app::KeyEvent::KEY_h:
+                board_size_ = 3;
+                hard_mode_ = true;
                 break;
             case ci::app::KeyEvent::KEY_e:
+                board_size_ = 3;
+                hard_mode_ = false;
                 break;
             case ci::app::KeyEvent::KEY_d:
+                board_size_ = 4;
+                hard_mode_ = true;
                 break;
             case ci::app::KeyEvent::KEY_p:
+                board_size_ = 4;
+                hard_mode_ = false;
                 break;
             case ci::app::KeyEvent::KEY_g:
+                board_size_ = 5;
+                hard_mode_ = true;
                 break;
             case ci::app::KeyEvent::KEY_y:
+                board_size_ = 5;
+                hard_mode_ = false;
+                break;
+            case ci::app::KeyEvent::KEY_t:
+                game_board_ = GameBoard(numbers, true);
+                curr_game_state_ = playGame;
+                break;
+            case ci::app::KeyEvent::KEY_r:
+                game_board_ = GameBoard(numbers, false);
+                curr_game_state_ = playGame;
                 break;
             case ci::app::KeyEvent::KEY_s:
-                game_board_ = GameBoard(board_size_);
+                game_board_ = GameBoard(board_size_, hard_mode_);
                 curr_game_state_ = playGame;
                 break;
         }

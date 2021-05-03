@@ -13,8 +13,9 @@
 
 namespace slidepuzzle {
 
-    GameBoard::GameBoard(size_t board_size) {
+    GameBoard::GameBoard(size_t board_size, bool hard_mode) {
         board_size_ = board_size;
+        hard_mode_ = hard_mode;
         size_t num = 0;
         curr_tile_ = Tile(true);
         tiles_.resize(board_size_, std::vector<Tile>(board_size_, Tile(num)));
@@ -24,8 +25,9 @@ namespace slidepuzzle {
         curr_tile_coords_ = tile_points_[board_size_ - 1][board_size_ - 1];
     }
 
-    GameBoard::GameBoard(std::vector<std::vector<size_t>> set_tiles) {
+    GameBoard::GameBoard(std::vector<std::vector<size_t>> set_tiles, bool hard_mode) {
         size_t num = 0;
+        hard_mode_ = hard_mode;
         curr_tile_ = Tile(true);
         board_size_ = set_tiles.size();
         tiles_.resize(board_size_, std::vector<Tile>(board_size_, Tile(num)));
@@ -161,8 +163,10 @@ namespace slidepuzzle {
     }
 
     bool GameBoard::IsGameWon() {
-        if (!tiles_[board_size_ - 1][board_size_ - 1].IsEmpty()) {
-            return false;
+        if (hard_mode_) {
+            if (!tiles_[board_size_ - 1][board_size_ - 1].IsEmpty()) {
+                return false;
+            }
         }
         std::vector<size_t> tile_nums;
         for (size_t row = 0; row != tiles_.size(); row++) {

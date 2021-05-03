@@ -53,6 +53,6 @@ namespace slidepuzzle {
         bool hard_mode_ = false;
         // For showing win screen
         std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 6, 8}, {7, 5, 1000}};
-        GameBoard game_board_ = GameBoard(numbers);
+        GameBoard game_board_ = GameBoard(board_size_, hard_mode_);
     };
 }
