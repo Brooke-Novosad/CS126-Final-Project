@@ -5,20 +5,25 @@
 
 namespace slidepuzzle {
 
-    SlidePuzzleApp::SlidePuzzleApp() : game_board_{GameBoard(numbers)} {
+    SlidePuzzleApp::SlidePuzzleApp() {
         ci::app::setWindowSize(kWindowSize, kWindowSize);
+        curr_game_state_ = menu;
     }
 
     void SlidePuzzleApp::draw() {
         ci::Color background_color("gray");
         ci::gl::clear(background_color);
-        if (!game_board_.IsGameWon()) {
-            game_board_.Display();
-        } else {
-            ci::gl::drawStringCentered(
-                    "You Win!",
-                    glm::vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("white"),
-                    ci::Font(font, font_size));
+        if (curr_game_state_ == menu) {
+            game_menu_.Display();
+        } else if (curr_game_state_ == playGame) {
+            if (!game_board_.IsGameWon()) {
+                game_board_.Display();
+            } else {
+                ci::gl::drawStringCentered(
+                        "You Win!",
+                        glm::vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("white"),
+                        ci::Font(font, font_size));
+            }
         }
     }
 
@@ -26,7 +31,6 @@ namespace slidepuzzle {
         game_board_.ClickTile(event.getPos());
     }
 
-    //use enums for directions instead of strings
     void SlidePuzzleApp::keyDown(ci::app::KeyEvent event) {
         switch (event.getCode()) {
             case ci::app::KeyEvent::KEY_UP:
@@ -41,8 +45,23 @@ namespace slidepuzzle {
             case ci::app::KeyEvent::KEY_RIGHT:
                 game_board_.SlideTile(GameBoard::right);
                 break;
+            case ci::app::KeyEvent::KEY_h:
+                break;
+            case ci::app::KeyEvent::KEY_e:
+                break;
+            case ci::app::KeyEvent::KEY_d:
+                break;
+            case ci::app::KeyEvent::KEY_p:
+                break;
+            case ci::app::KeyEvent::KEY_g:
+                break;
+            case ci::app::KeyEvent::KEY_y:
+                break;
+            case ci::app::KeyEvent::KEY_s:
+                game_board_ = GameBoard(board_size_);
+                curr_game_state_ = playGame;
+                break;
         }
     }
-
 }
 

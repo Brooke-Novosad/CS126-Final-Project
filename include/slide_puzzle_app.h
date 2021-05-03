@@ -6,6 +6,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "game_board.h"
+#include "menu.h"
 
 namespace slidepuzzle {
 
@@ -15,6 +16,7 @@ namespace slidepuzzle {
     class SlidePuzzleApp : public ci::app::App {
 
     public:
+        enum gameState {menu, playGame};
         /**
          * A constructor that sets up the app screen.
          */
@@ -37,19 +39,20 @@ namespace slidepuzzle {
          */
         void keyDown(ci::app::KeyEvent event) override;
 
-        /**
-        //might not need, use mousedown overrides
-        void update() override;
-     **/
+        void Create();
+
         const int kWindowSize = 875;
         const int kMargin = 500;
 
     private:
+        Menu game_menu_ = Menu();
+        gameState curr_game_state_;
         std::string font = "Arial";
         float font_size = 100;
         size_t board_size_ = 3;
+        bool hard_mode_ = false;
         // For showing win screen
         std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 6, 8}, {7, 5, 1000}};
-        GameBoard game_board_;
+        GameBoard game_board_ = GameBoard(numbers);
     };
 }

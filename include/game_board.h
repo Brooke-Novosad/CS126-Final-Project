@@ -108,9 +108,9 @@ namespace slidepuzzle {
         size_t curr_row;
         size_t curr_col;
 
-        const vec2 kTop_corner = vec2(50, 50);
-        const vec2 kBottom_corner = vec2(800, 800);
-        const ci::Color white = "white";
-        const ci::Color pink = "pink";
+        vec2 kTop_corner = vec2(50, 50);
+        vec2 kBottom_corner = vec2(800, 800);
+        ci::Color white = "white";
+        ci::Color pink = "pink";
     };
 }

@@ -54,7 +54,7 @@ list(APPEND CORE_SOURCE_FILES   )
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/tile.cc
                             src/slide_puzzle_app.cc
-        src/puzzle_game.cc
+        src/menu.cc
         src/game_board.cc)
 
 
