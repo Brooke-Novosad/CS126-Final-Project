@@ -159,20 +159,51 @@ TEST_CASE("Click Tile") {
 }
 
 TEST_CASE("Slide Tile") {
-    std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
-    slidepuzzle::GameBoard game(numbers, true);
     SECTION("Slide tile to empty space to the left") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(350, 560));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        slidepuzzle::Tile tile = game.GetTileVector()[2][1];
+        REQUIRE(tile.IsEmpty() == true);
+        game.ClickTile(vec2(560, 560));
+        game.SlideTile(slidepuzzle::GameBoard::left);
+        slidepuzzle::Tile empty = game.GetTileVector()[2][2];
+        slidepuzzle::Tile tile1 = game.GetTileVector()[2][1];
+        REQUIRE(tile1.GetTileNum() == 7);
+        REQUIRE(empty.IsEmpty() == true);
     }
     SECTION("Slide tile to empty space to the right") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
         slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(350, 560));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        slidepuzzle::Tile tile = game.GetTileVector()[2][2];
+        slidepuzzle::Tile empty = game.GetTileVector()[2][1];
+        REQUIRE(tile.GetTileNum() == 7);
+        REQUIRE(empty.IsEmpty() == true);
     }
     SECTION("Slide tile to empty space down") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(560, 350));
+        game.SlideTile(slidepuzzle::GameBoard::down);
+        slidepuzzle::Tile tile = game.GetTileVector()[2][2];
+        slidepuzzle::Tile empty = game.GetTileVector()[1][2];
+        REQUIRE(tile.GetTileNum() == 8);
+        REQUIRE(empty.IsEmpty() == true);
     }
     SECTION("Slide tile to empty space up") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(560, 350));
+        game.SlideTile(slidepuzzle::GameBoard::down);
+        game.ClickTile(vec2(560, 560));
+        game.SlideTile(slidepuzzle::GameBoard::up);
+        slidepuzzle::Tile tile = game.GetTileVector()[1][2];
+        slidepuzzle::Tile empty = game.GetTileVector()[2][2];
+        REQUIRE(tile.GetTileNum() == 8);
+        REQUIRE(empty.IsEmpty() == true);
     }
     SECTION("Slide tile to left wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
@@ -181,45 +212,76 @@ TEST_CASE("Slide Tile") {
         game.SlideTile(slidepuzzle::GameBoard::left);
         slidepuzzle::Tile tile = game.GetTileVector()[0][0];
         REQUIRE(numbers[0][0] == tile.GetTileNum());
-
     }
     SECTION("Slide tile to right wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
         slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(560, 60)); //6
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        slidepuzzle::Tile tile = game.GetTileVector()[0][2];
+        REQUIRE(numbers[0][2] == tile.GetTileNum());
     }
     SECTION("Slide tile to top wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
         slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(60, 60)); //2
+        game.SlideTile(slidepuzzle::GameBoard::up);
+        slidepuzzle::Tile tile = game.GetTileVector()[0][0];
+        REQUIRE(numbers[0][0] == tile.GetTileNum());
     }
     SECTION("Slide tile to bottom wall") {
         std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
         slidepuzzle::GameBoard game(numbers, true);
         game.ClickTile(vec2(60, 560)); //3
+        game.SlideTile(slidepuzzle::GameBoard::down);
+        slidepuzzle::Tile tile = game.GetTileVector()[2][0];
+        REQUIRE(numbers[2][0] == tile.GetTileNum());
     }
     SECTION("Slide tile into another tile") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(60, 560)); //3
+        game.SlideTile(slidepuzzle::GameBoard::up);
+        slidepuzzle::Tile tile1 = game.GetTileVector()[2][0];
+        slidepuzzle::Tile tile2 = game.GetTileVector()[1][0];
+        REQUIRE(numbers[2][0] == tile1.GetTileNum());
+        REQUIRE(numbers[1][0] == tile2.GetTileNum());
     }
 }
 
 TEST_CASE("Win Game") {
-    SECTION("Board won easy mode") {
-
+    SECTION("Board won easy mode with empty tile in bottom right") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 5, 6}, {7, 8, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        REQUIRE(game.IsGameWon() == true);
+    }
+    SECTION("Board won easy mode with empty tile not in bottom right") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 5, 6}, {7, 8, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        game.ClickTile(vec2(350, 560));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        REQUIRE(game.IsGameWon() == true);
     }
     SECTION("Board won hard mode") {
-
-    }
-    SECTION("Board not won yet random") {
-
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 5, 6}, {7, 8, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        REQUIRE(game.IsGameWon() == true);
     }
     SECTION("Board in hard mode, in order, not won") {
-
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3}, {4, 5, 6}, {7, 8, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(350, 560));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        REQUIRE(game.IsGameWon() == false);
     }
     SECTION("Board not won yet in easy mode") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        REQUIRE(game.IsGameWon() == false);
     }
     SECTION("Board not won yet in hard mode") {
-
+        std::vector<std::vector<size_t>> numbers {{2, 4, 6}, {1, 5, 8}, {3, 7, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        REQUIRE(game.IsGameWon() == false);
     }
 }
