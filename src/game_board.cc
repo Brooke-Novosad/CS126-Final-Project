@@ -94,12 +94,6 @@ namespace slidepuzzle {
         return curr_tile_;
     }
 
-    std::string GameBoard::GetNum() {
-        std::string hi = std::to_string(tile_points_.at(1).at(0).x) + " " +
-                         std::to_string(tile_points_.at(1).at(0).y);
-        return hi;
-    }
-
     void GameBoard::Display() const {
         for (size_t row = 0; row != tiles_.size(); row++) {
             for (size_t col = 0; col != tiles_.at(row).size(); col++) {

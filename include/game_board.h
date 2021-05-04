@@ -38,12 +38,6 @@ namespace slidepuzzle {
         GameBoard(std::vector<std::vector<size_t>> set_tiles, bool hard_mode);
 
         /**
-         * A method that helps print things out. This is for making sure things work, won't be included at the end.
-         * @return a string
-         */
-        std::string GetNum();
-
-        /**
          * Gets the vector of all the tiles for this game.
          * @return a vector of Tiles
          */
@@ -84,9 +78,7 @@ namespace slidepuzzle {
          */
         bool IsGameWon();
 
-
     private:
-
         /**
          * A helper method for the constructor that adds Tiles to it's vector.
          */

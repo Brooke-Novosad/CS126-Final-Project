@@ -47,8 +47,12 @@ namespace slidepuzzle {
     private:
         Menu game_menu_ = Menu();
         gameState curr_game_state_;
+
         std::string font = "Arial";
         float font_size = 100;
+        float font_size1 = 50;
+        ci::Color white = "white";
+
         size_t board_size_ = 3;
         bool hard_mode_ = false;
         // For showing win screen

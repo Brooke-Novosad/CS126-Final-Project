@@ -21,8 +21,12 @@ namespace slidepuzzle {
             } else {
                 ci::gl::drawStringCentered(
                         "You Win!",
-                        glm::vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("white"),
+                        glm::vec2(kWindowSize / 2, kWindowSize / 2), white,
                         ci::Font(font, font_size));
+                ci::gl::drawStringCentered(
+                        "To play again, press q",
+                        glm::vec2(kWindowSize / 2, 2 * kWindowSize / 3), white,
+                        ci::Font(font, font_size1));
             }
         }
     }
@@ -80,6 +84,9 @@ namespace slidepuzzle {
             case ci::app::KeyEvent::KEY_s:
                 game_board_ = GameBoard(board_size_, hard_mode_);
                 curr_game_state_ = playGame;
+                break;
+            case ci::app::KeyEvent::KEY_q:
+                curr_game_state_ = menu;
                 break;
         }
     }

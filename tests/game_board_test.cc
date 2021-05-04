@@ -4,8 +4,7 @@
 #include <catch2/catch.hpp>
 #include "game_board.h"
 #include <iostream>
-//make tests for sliding the pieces
-//make tests for ending the game
+
 TEST_CASE("Constructor") {
     size_t num = 3;
     slidepuzzle::GameBoard game(num, true);
