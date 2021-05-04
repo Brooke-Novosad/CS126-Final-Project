@@ -29,14 +29,14 @@ namespace slidepuzzle {
         if (!empty_) {
             ci::gl::color(teal);
             ci::gl::drawSolidRect(ci::Rectf(top_point, vec2(top_point.x + tile_width,
-                                                            top_point.y + tile_width)));
+                                                                  top_point.y + tile_width)));
             ci::gl::color(yellow);
             ci::gl::drawStrokedRect(ci::Rectf(top_point, vec2(top_point.x + tile_width,
-                                                              top_point.y + tile_width)));
+                                                                      top_point.y + tile_width)));
             vec2 text = vec2(top_point.x + tile_width / 2, top_point.y + tile_width / 2);
             ci::gl::drawStringCentered(std::to_string(tile_num_),glm::vec2(top_point.x + tile_width / 2,
-                                                                           top_point.y + tile_width / 2),
-                                       white, ci::Font(font, font_size));
+                                                                                   top_point.y + tile_width / 2),
+                                                                      white, ci::Font(font, font_size));
         }
     }
 

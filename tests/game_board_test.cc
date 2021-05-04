@@ -283,4 +283,38 @@ TEST_CASE("Win Game") {
         slidepuzzle::GameBoard game(numbers, true);
         REQUIRE(game.IsGameWon() == false);
     }
+    SECTION("Board won easy mode with empty tile in bottom right 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        REQUIRE(game.IsGameWon() == true);
+    }
+    SECTION("Board won easy mode with empty tile not in bottom right 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        game.ClickTile(vec2(450, 640));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        REQUIRE(game.IsGameWon() == true);
+    }
+    SECTION("Board won hard mode 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        REQUIRE(game.IsGameWon() == true);
+    }
+    SECTION("Board in hard mode, in order, not won 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        game.ClickTile(vec2(450, 640));
+        game.SlideTile(slidepuzzle::GameBoard::right);
+        REQUIRE(game.IsGameWon() == false);
+    }
+    SECTION("Board not won yet in easy mode 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 11, 13}, {7, 12, 8, 14}, {10, 9, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, false);
+        REQUIRE(game.IsGameWon() == false);
+    }
+    SECTION("Board not won yet in hard mode 4x4") {
+        std::vector<std::vector<size_t>> numbers {{1, 2, 3, 4}, {5, 6, 11, 13}, {7, 12, 8, 14}, {10, 9, 15, 90}};
+        slidepuzzle::GameBoard game(numbers, true);
+        REQUIRE(game.IsGameWon() == false);
+    }
 }

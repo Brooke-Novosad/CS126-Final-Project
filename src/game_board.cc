@@ -4,13 +4,6 @@
 #include "game_board.h"
 #include <iostream>
 
-//this class will be used to keep track of the board state, ie the order of numbers, the tiles and the open space.
-// this will be used in the app so the key functions will be in here too.
-// call in the puzzle game functions for the game to be played ie. if someone wins?
-//i might not need that class and i could do it all in here
-
-//need display like in gas container that displays the tiles
-
 namespace slidepuzzle {
 
     GameBoard::GameBoard(size_t board_size, bool hard_mode) {
@@ -125,7 +118,9 @@ namespace slidepuzzle {
     void GameBoard::SlideTile(direction direction) {
         if (!curr_tile_.IsEmpty()) {
             if (direction == up) {
+                // not moving into a wall
                 if (curr_row != 0) {
+                    // makes sure the tile is moving into an empty spot
                     if (tiles_[curr_row - 1][curr_col].IsEmpty()) {
                         tiles_[curr_row - 1][curr_col] = curr_tile_;
                         tiles_[curr_row][curr_col] = Tile(true);
@@ -162,6 +157,7 @@ namespace slidepuzzle {
                 return false;
             }
         }
+        // adds numbers of tiles into a separate size_t vector
         std::vector<size_t> tile_nums;
         for (size_t row = 0; row != tiles_.size(); row++) {
             for (size_t col = 0; col != tiles_.at(row).size(); col++) {

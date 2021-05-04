@@ -9,14 +9,15 @@
 #include "menu.h"
 
 namespace slidepuzzle {
-
 /**
 * An app for visualising the slide puzzle game.
 */
     class SlidePuzzleApp : public ci::app::App {
 
     public:
+        // enums for the state of the game.
         enum gameState {menu, playGame};
+
         /**
          * A constructor that sets up the app screen.
          */
@@ -38,8 +39,6 @@ namespace slidepuzzle {
          * @param event the event of the key that is pressed
          */
         void keyDown(ci::app::KeyEvent event) override;
-
-        void Create();
 
         const int kWindowSize = 875;
         const int kMargin = 500;

@@ -1,11 +1,11 @@
 # Slide Puzzle
 This is a playable slide puzzle. The goal is to get the tiles in chronological number order. There is an option to 
 play with a 3x3, 4x4, and 5x5 board and in easy or hard mode. Hard mode is when the empty tile has to be in the bottom 
-right corner to win. Easy mode is the tiles have to be in order but the empty tile doesn't have to be in the bottom
+right corner to win. Easy mode is when the tiles have to be in order but the empty tile doesn't have to be in the bottom
 right corner.
 ![image](https://user-images.githubusercontent.com/73136277/117036605-34da6a80-accb-11eb-902e-ba395d90ff1b.png)
 
-##Dependencies
+## Dependencies
 * Visual Studio 2015
 * CMake
 * Cinder
